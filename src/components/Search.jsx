@@ -1,6 +1,9 @@
-var Search = () => (
+var Search = ({updateVideo, searchYouTube}) => (
   <div className="search-bar form-inline">
-    <input className="form-control" type="text" />
+    <input className="form-control" type="text" onInput={(event) => {
+      let input = $(event.target).val();
+      searchYouTube({query: input}, updateVideo);
+    }}/>
     <button className="btn hidden-sm-down">
       <span className="glyphicon glyphicon-search"></span>
     </button>
