@@ -1,3 +1,8 @@
+var Router = window.ReactRouter.Router;
+var Route = window.ReactRouter.Route;
+var Link = window.ReactRouter.Link;
+var hashHistory = window.ReactRouter.hashHistory;
+
 class App extends React.Component {
   constructor(props) {
     //pass props into super so an instance of App will have all properties found on props
@@ -9,6 +14,10 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.searchYouTube({query: 'skiing'}, this.updateVideo.bind(this));
+  }
+
   render() {
     return (
       <div>
@@ -16,15 +25,21 @@ class App extends React.Component {
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
-        <div className="col-md-5">
-          <VideoList videos={this.state.videoList} videoListClick={this.videoListClick.bind(this)}/>
-        </div>
+
+        <p>//Link to videos</p>
+        <Router history={hashHistory}>
+          <Route path="/" component={VideoListWrapper}>
+            {this.state.videoList.map((video) => (
+              <Route path={video.id.videoId} component={VideoListEntryWrapper}/>
+            ))}
+          </Route>
+        </Router>
       </div>
     );
   }
 
-  componentDidMount() {
-    this.props.searchYouTube({query: 'skiing'}, this.updateVideo.bind(this));
+  videoListEntryWrapper(video) {
+    return <VideoListEntry video={video} videoListClick={this.videoListClick.bind(this)}/>;
   }
 
   videoListClick(video) {
@@ -45,4 +60,28 @@ class App extends React.Component {
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
 
+/*
+Links to videos
+<div className="col-md-5">
+          <VideoList videos={this.state.videoList} videoListClick={this.videoListClick.bind(this)}/>
+        </div>
 
+*/
+
+var VideoListWrapper = () => {
+  return (
+    <div className="col-md-5">
+      <VideoList videos={App.state.videoList}/>
+    </div>
+  );
+};
+
+var VideoListEntryWrapper = () => (<VideoListEntry video={video} videoListClick={App.videoListClick.bind(App)}/>);
+
+window.VideoListEntryWrapper = VideoListEntryWrapper;
+window.VideoListWrapper = VideoListWrapper;
+
+
+      // {links.map((link) => (
+      //   <Route path='/videos' component={link.component}/>
+      // ))}

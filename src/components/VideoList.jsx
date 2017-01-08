@@ -1,7 +1,9 @@
 var VideoList = ({videos, videoListClick}) => (
   <div className="video-list media">
+    <p>Hello</p>
+    {this.props.children}
     {videos.map((video) => (
-      <VideoListEntry video={video} videoListClick={videoListClick}/>
+      <li><Link to={video.id.videoId}>{video.snippet.title}</Link></li>
     ))}
   </div>
 );
@@ -12,6 +14,11 @@ VideoList.propTypes = {
   videos: React.PropTypes.array.isRequired
 };
 
-// In the ES6 spec, files are "modules" and do not share a top-level scope.
-// `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
+
+/*
+{videos.map((video) => (
+      <VideoListEntry video={video} videoListClick={videoListClick}/>
+    ))}
+
+*/
