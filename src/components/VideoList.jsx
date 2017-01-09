@@ -1,9 +1,7 @@
-var VideoList = ({videos, videoListClick}) => (
+var VideoList = ({videos, videoClick}) => (
   <div className="video-list media">
-    <p>Hello</p>
-    {this.props.children}
     {videos.map((video) => (
-      <li><Link to={video.id.videoId}>{video.snippet.title}</Link></li>
+      <VideoListEntry video={video}/>
     ))}
   </div>
 );
@@ -15,10 +13,3 @@ VideoList.propTypes = {
 };
 
 window.VideoList = VideoList;
-
-/*
-{videos.map((video) => (
-      <VideoListEntry video={video} videoListClick={videoListClick}/>
-    ))}
-
-*/

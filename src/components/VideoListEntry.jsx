@@ -1,17 +1,23 @@
-var VideoListEntry = ({video, videoListClick}) => (
+var Link = window.ReactRouter.Link;
+
+var VideoListEntry = ({video}) => {
+  console.log(video.id.videoId);
+  return (
   <div className="video-list-entry">
     <div className="media-left media-middle">
       <img className="media-object" src={video.snippet.thumbnails.default.url} alt=""/>
     </div>
     <div className="media-body">
-      <div className="video-list-entry-title" onClick={() => (videoListClick(video))}>{video.snippet.title}</div>
+      <Link to={`/${video.id.videoId}`}>
+        <div className="video-list-entry-title">{video.snippet.title}</div>
+      </Link>
       <div className="video-list-entry-detail">
-        {video.snippet.description} 
+        {video.snippet.description}
       </div>
     </div>
   </div>
 );
-
+}
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
 VideoListEntry.propTypes = {
