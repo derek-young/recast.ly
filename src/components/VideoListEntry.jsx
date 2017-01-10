@@ -26,3 +26,21 @@ VideoListEntry.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.VideoListEntry = VideoListEntry;
+
+// var VideoListEntry = ({video}) => {
+//   return (
+//   <div className="video-list-entry">
+//     <div className="media-left media-middle">
+//       <img className="media-object" src={video.snippet.thumbnails.default.url} alt=""/>
+//     </div>
+//     <div className="media-body">
+//       <Link to={`/${video.id.videoId}`}>
+//         <div className="video-list-entry-title">{video.snippet.title} {video.id.videoId}</div>
+//       </Link>
+//       <div className="video-list-entry-detail">
+//         {video.snippet.description}
+//       </div>
+//     </div>
+//   </div>
+// );
+// }
