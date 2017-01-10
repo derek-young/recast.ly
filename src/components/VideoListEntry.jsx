@@ -1,7 +1,6 @@
 var Link = window.ReactRouter.Link;
 
 var VideoListEntry = ({video}) => {
-  console.log(video.id.videoId);
   return (
   <div className="video-list-entry">
     <div className="media-left media-middle">
@@ -9,7 +8,7 @@ var VideoListEntry = ({video}) => {
     </div>
     <div className="media-body">
       <Link to={`/${video.id.videoId}`}>
-        <div className="video-list-entry-title">{video.snippet.title}</div>
+        <div className="video-list-entry-title">{video.snippet.title} {video.id.videoId}</div>
       </Link>
       <div className="video-list-entry-detail">
         {video.snippet.description}
