@@ -1,21 +1,3 @@
-var Router = window.ReactRouter.Router;
-var Route = window.ReactRouter.Route;
-var hashHistory = window.ReactRouter.hashHistory;
-var globalVideos = window.exampleVideoData;
-var globalVideo = window.exampleVideoData[0];
-
-class VideoWrapper extends React.Component {
-  render() {
-    return (
-      <div>
-        <div>{this.props.children}</div>
-        <div className='col-md-5'>
-          <VideoList videos={this.props.route.videos}/>
-        </div>
-      </div>
-    );
-  }
-}
 
 class App extends React.Component {
   constructor() {
@@ -36,16 +18,19 @@ class App extends React.Component {
       <div>
         <Nav updateVideo={this.updateVideo.bind(this)} searchYouTube={window.searchYouTube}/>
         <div className='col-md-7'>
-          <Router history={hashHistory}>
-            <Route path='/' videos={this.state.videoList} component={VideoWrapper}>
-              {this.state.videoList.map((video) => (
-                <Route path={`/${video.id.videoId}`} component={() => (<VideoPlayer video={video}/>)}/>
-              ))}
-            </Route>
-          </Router>
+          <VideoPlayer video={this.state.currentVideo}/>
+        </div>
+        <div className="col-md-5">
+          <VideoList videos={this.state.videoList} videoListClick={this.videoListClick.bind(this)}/>
         </div>
       </div>
     );
+  }
+
+  videoListClick(video) {
+    this.setState({
+      currentVideo: video
+    });
   }
 
   updateVideo(videos) {
